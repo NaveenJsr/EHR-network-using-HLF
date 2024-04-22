@@ -1,0 +1,77 @@
+version: '2'
+
+networks:
+  net_basic:
+
+services:
+
+  orderer.ehr.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: orderer.ehr.com
+    container_name: orderer.ehr.com
+    networks:
+      - net_basic
+
+  peer0.Hospital-ehr.com:
+    container_name: peer0.Hospital-ehr.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.Hospital-ehr.com
+    networks:
+      - net_basic
+
+  peer0.Patient-ehr.com:
+    container_name: peer0.Patient-ehr.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.Patient-ehr.com
+    networks:
+      - net_basic
+
+  peer0.Labs-ehr.com:
+    container_name: peer0.Labs-ehr.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.Labs-ehr.com
+    networks:
+      - net_basic
+
+  peer0.Insurance-ehr.com:
+    container_name: peer0.Insurance-ehr.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: peer0.Insurance-ehr.com
+    networks:
+      - net_basic
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
+      - CORE_PEER_LOCALMSPID=MocMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/users/Admin@Hospital-ehr.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/:/opt/gopath/src/github.com/chaincode
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+      - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.ehr.com
+      - peer0.Hospital-ehr.com
+      - peer0.Patient-ehr.com
+      - peer0.Labs-ehr.com
+      - peer0.Insurance-ehr.com
+    networks:
+      - net_basic

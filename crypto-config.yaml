@@ -1,0 +1,58 @@
+OrdererOrgs:
+    - Name: Orderer
+      Domain: ehr.com
+      EnableNodeOUs: true
+      SANS:
+        - localhost
+        - ehr.com
+      Specs:
+          - Hostname: orderer
+      Template:
+          Count: 1
+      Users:
+          Count: 1
+
+PeerOrgs:
+    - Name: Hospital
+      Domain: Hospital-ehr.com
+      EnableNodeOUs: true
+      SANS:
+        - localhost
+        - ehr.com
+      Template:
+          Count: 1
+      Users:
+          Count: 1
+
+    - Name: Patient
+      Domain: Patient-ehr.com
+      EnableNodeOUs: true
+      SANS:
+        - localhost
+        - ehr.com
+      Template:
+          Count: 1
+      Users:
+          Count: 1
+
+    - Name: Labs
+      Domain: Labs-ehr.com
+      EnableNodeOUs: true
+      SANS:
+        - localhost
+        - ehr.com
+      Template:
+          Count: 1
+      Users:
+          Count: 1
+
+    - Name: Insurance
+      Domain: Insurance-ehr.com
+      EnableNodeOUs: true
+      SANS:
+        - localhost
+        - ehr.com
+      Template:
+          Count: 1
+      Users:
+          Count: 1

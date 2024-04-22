@@ -1,0 +1,218 @@
+---
+
+## Organizations Section
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: crypto-config/ordererOrganizations/ehr.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererMSP.admin')"
+        OrdererEndpoints:
+            - orderer.ehr.com:7050
+
+
+    - &Hospital
+        Name: Hospital
+        ID: HospitalMSP
+        MSPDir: crypto-config/peerOrganizations/Hospital-ehr.com/msp
+        Policies:
+          Readers:
+            Type: Signature
+            Rule: "OR('HospitalMSP.admin', 'HospitalMSP.peer', 'HospitalMSP.client')"
+          Writers:
+            Type: Signature
+            Rule: "OR('HospitalMSP.admin', 'HospitalMSP.client')"
+          Admins:
+            Type: Signature
+            Rule: "OR('HospitalMSP.admin')"
+          Endorsement:
+            Type: Signature
+            Rule: "OR('HospitalMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.Hospital-ehr.com
+              Port: 7051
+
+
+    - &Patient
+        Name: Patient
+        ID: PatientMSP
+        MSPDir: crypto-config/peerOrganizations/Patient-ehr.com/msp
+        Policies:
+          Readers:
+            Type: Signature
+            Rule: "OR('PatientMSP.admin', 'PatientMSP.peer', 'PatientMSP.client')"
+          Writers:
+            Type: Signature
+            Rule: "OR('PatientMSP.admin', 'PatientMSP.client')"
+          Admins:
+            Type: Signature
+            Rule: "OR('PatientMSP.admin')"
+          Endorsement:
+            Type: Signature
+            Rule: "OR('PatientMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.Patient-ehr.com
+              Port: 7051
+
+
+    - &Labs
+        Name: Labs
+        ID: LabsMSP
+        MSPDir: crypto-config/peerOrganizations/Labs-ehr.com/msp
+        Policies:
+          Readers:
+            Type: Signature
+            Rule: "OR('LabsMSP.admin', 'LabsMSP.peer', 'LabsMSP.client')"
+          Writers:
+            Type: Signature
+            Rule: "OR('LabsMSP.admin', 'LabsMSP.client')"
+          Admins:
+            Type: Signature
+            Rule: "OR('LabsMSP.admin')"
+          Endorsement:
+            Type: Signature
+            Rule: "OR('LabsMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.Labs-ehr.com
+              Port: 7051
+
+
+    - &Insurance
+        Name: Insurance
+        ID: InsuranceMSP
+        MSPDir: crypto-config/peerOrganizations/Insurance-ehr.com/msp
+        Policies:
+          Readers:
+            Type: Signature
+            Rule: "OR('InsuranceMSP.admin', 'InsuranceMSP.peer', 'InsuranceMSP.client')"
+          Writers:
+            Type: Signature
+            Rule: "OR('InsuranceMSP.admin', 'InsuranceMSP.client')"
+          Admins:
+            Type: Signature
+            Rule: "OR('InsuranceMSP.admin')"
+          Endorsement:
+            Type: Signature
+            Rule: "OR('InsuranceMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.Insurance-ehr.com
+              Port: 7051
+
+
+Capabilities:
+    Channel: &ChannelCapabilities
+        V2_0: true
+    Orderer: &OrdererCapabilities
+        V2_0: true
+    Application: &ApplicationCapabilities
+        V2_0: true
+
+
+## Alias Name with &OrdererDefault
+Orderer: &OrdererDefaults
+    OrdererType: etcdraft
+    Addresses:
+        - orderer.ehr.com:7050
+    EtcdRaft:
+        Consenters:
+        - Host: orderer.ehr.com
+          Port: 7050
+          ClientTLSCert: crypto-config/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/server.crt
+          ServerTLSCert: crypto-config/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/server.crt
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Organizations:
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+
+
+## Alias Name with &ApplicationDefault
+Application: &ApplicationDefaults
+  Organizations:   
+  Policies: &ApplicationDefaultPolicies
+        LifecycleEndorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+  Capabilities:
+        <<: *ApplicationCapabilities
+
+
+Channel: &ChannelDefaults
+  Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+  Capabilities:
+        <<: *ChannelCapabilities
+
+
+## Profiles Section
+Profiles:
+    FourOrgsOrdererGenesis:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Hospital
+                    - *Patient
+                    - *Labs
+                    - *Insurance
+    FourOrgsChannel:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Hospital
+                - *Patient
+                - *Labs
+                - *Insurance
+            Capabilities:
+                <<: *ApplicationCapabilities
