@@ -122,4 +122,4 @@
 
 ```
 
-### Install ChaniCode
+### Install ChainCode
