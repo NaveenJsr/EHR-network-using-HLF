@@ -47,10 +47,11 @@
 
 ```bash
   export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/users/Admin@Hospital-ehr.com/msp
-  CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
-  CORE_PEER_LOCALMSPID="HospitalMSP"
+  export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
+  export CORE_PEER_LOCALMSPID="HospitalMSP"
   export CHANNEL_NAME=ehrchannel
   channel create -o orderer.ehr.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/msp/tlscacerts/tlsca.ehr.com-cert.pem --outputBlock ./channel-artifacts/ehrchannel.block
+
 ```
 
 
