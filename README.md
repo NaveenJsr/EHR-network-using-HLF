@@ -124,3 +124,46 @@
 ```
 
 ### Install ChainCode
+
+```bash
+  cd ../../..
+  cd chaincode/go
+  go mod init
+  go mod tidy
+  go build
+
+  peer lifecycle chaincode package ehrcc.tar.gz \
+  --path . \
+  --lang golang \
+  --label ehrcc_1.0
+
+  org1:
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/users/Admin@Hospital-ehr.com/msp 
+  export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
+  export CORE_PEER_LOCALMSPID=HospitalMSP
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt
+  peer lifecycle chaincode install ehrcc.tar.gz
+
+    org2:
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/users/Admin@Patient-ehr.com/msp
+  export CORE_PEER_ADDRESS=peer0.Patient-ehr.com:7051
+  export CORE_PEER_LOCALMSPID=PatientMSP
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/ca.crt
+  peer lifecycle chaincode install ehrcc.tar.gz
+
+    org3:
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/users/Admin@Labs-ehr.com/msp
+  export CORE_PEER_ADDRESS=peer0.Labs-ehr.com:7051
+  export CORE_PEER_LOCALMSPID=LabsMSP
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/ca.crt
+  peer lifecycle chaincode install ehrcc.tar.gz
+
+  org4:
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/users/Admin@Insurance-ehr.com/msp
+  export CORE_PEER_ADDRESS=peer0.Insurance-ehr.com:7051
+  export CORE_PEER_LOCALMSPID=InsuranceMSP
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+  peer lifecycle chaincode install ehrcc.tar.gz
+
+```
+
