@@ -169,3 +169,136 @@
 
 ### Aprove chaincode :
 
+org1:
+```bash
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt
+  export CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/server.crt
+  export CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/server.key
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/users/Admin@Hospital-ehr.com/msp
+  export CORE_PEER_LOCALMSPID=HospitalMSP
+  export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
+  
+  peer lifecycle chaincode approveformyorg \
+    --channelID ehrchannel \
+    --name ehrcc \
+    --version 1.0 \
+    --sequence 1 \
+    --init-required \
+    --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+    --orderer orderer.ehr.com:7050 \
+    --tls \
+    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+
+```
+
+org2:
+```bash
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/ca.crt
+  export CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/server.crt
+  export CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/server.key
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/users/Admin@Patient-ehr.com/msp
+  export CORE_PEER_LOCALMSPID=PatientMSP
+  export CORE_PEER_ADDRESS=peer0.Patient-ehr.com:7051
+  
+  peer lifecycle chaincode approveformyorg \
+    --channelID ehrchannel \
+    --name ehrcc \
+    --version 1.0 \
+    --sequence 1 \
+    --init-required \
+    --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+    --orderer orderer.ehr.com:7050 \
+    --tls \
+    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+
+```
+
+org3:
+```bash
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/ca.crt
+  export CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/server.crt
+  export CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/server.key
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/users/Admin@Labs-ehr.com/msp
+  export CORE_PEER_LOCALMSPID=LabsMSP
+  export CORE_PEER_ADDRESS=peer0.Labs-ehr.com:7051
+  
+  peer lifecycle chaincode approveformyorg \
+    --channelID ehrchannel \
+    --name ehrcc \
+    --version 1.0 \
+    --sequence 1 \
+    --init-required \
+    --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+    --orderer orderer.ehr.com:7050 \
+    --tls \
+    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+
+```
+
+org4:
+```bash
+export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+export CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/server.crt
+export CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/server.key
+export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/users/Admin@Insurance-ehr.com/msp
+export CORE_PEER_LOCALMSPID=InsuranceMSP
+export CORE_PEER_ADDRESS=peer0.Insurance-ehr.com:7051
+
+peer lifecycle chaincode approveformyorg \
+  --channelID ehrchannel \
+  --name ehrcc \
+  --version 1.0 \
+  --sequence 1 \
+  --init-required \
+  --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+  --orderer orderer.ehr.com:7050 \
+  --tls \
+  --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+  --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+
+```
+
+
+### check commit readiness
+
+```bash
+  peer lifecycle chaincode checkcommitreadiness \
+    --channelID ehrchannel \
+    --name ehrcc \
+    --version 1.0 \
+    --sequence 1 \
+    --output json \
+    --init-required \
+    --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+    --peerAddresses peer0.Insurance-ehr.com:7051 \
+    --tls \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+```
+
+### commit chaincode
+
+```bash
+  peer lifecycle chaincode commit \
+    --channelID ehrchannel \
+    --name ehrcc \
+    --version 1.0 \
+    --sequence 1 \
+    --init-required \
+    --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
+    --peerAddresses peer0.Hospital-ehr.com:7051 \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt \
+    --peerAddresses peer0.Patient-ehr.com:7051 \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/ca.crt \
+    --peerAddresses peer0.Labs-ehr.com:7051 \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/ca.crt \
+    --peerAddresses peer0.Insurance-ehr.com:7051 \
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt \
+    --tls \
+    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
+    --orderer orderer.ehr.com:7050
+
+```
