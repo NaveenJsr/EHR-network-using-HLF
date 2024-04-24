@@ -200,7 +200,7 @@ org1:
     --orderer orderer.ehr.com:7050 \
     --tls \
     --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
-    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt
 
 ```
 
@@ -223,7 +223,7 @@ org2:
     --orderer orderer.ehr.com:7050 \
     --tls \
     --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
-    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/ca.crt
 
 ```
 
@@ -246,7 +246,7 @@ org3:
     --orderer orderer.ehr.com:7050 \
     --tls \
     --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ehr.com/orderers/orderer.ehr.com/tls/ca.crt \
-    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
+    --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/ca.crt
 
 ```
 
