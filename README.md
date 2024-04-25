@@ -152,7 +152,7 @@ org1:
   export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051export CORE_PEER_ADDRESS=peer0.Hospital-ehr.com:7051
   export CORE_PEER_LOCALMSPID=HospitalMSP
   export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Hospital-ehr.com/peers/peer0.Hospital-ehr.com/tls/ca.crt
-  peer chaincode install -n ehrcc -v 1.0 -p /opt/gopath/src/github.com/chaincode/ehr
+  peer lifecycle chaincode install ehrcc.tar.gz
 
 ```
 org2:
@@ -161,7 +161,7 @@ org2:
   export CORE_PEER_ADDRESS=peer0.Patient-ehr.com:7051
   export CORE_PEER_LOCALMSPID=PatientMSP
   export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Patient-ehr.com/peers/peer0.Patient-ehr.com/tls/ca.crt
-  peer chaincode install -n ehrcc -v 1.0 -p /opt/gopath/src/github.com/chaincode/ehr
+  peer lifecycle chaincode install ehrcc.tar.gz
 
 ```
 org3:
@@ -170,7 +170,7 @@ org3:
   export CORE_PEER_ADDRESS=peer0.Labs-ehr.com:7051
   export CORE_PEER_LOCALMSPID=LabsMSP
   export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Labs-ehr.com/peers/peer0.Labs-ehr.com/tls/ca.crt
-  peer chaincode install -n ehrcc -v 1.0 -p /opt/gopath/src/github.com/chaincode/ehr
+  peer lifecycle chaincode install ehrcc.tar.gz
 
 ```
 org4:
@@ -179,7 +179,7 @@ org4:
   export CORE_PEER_ADDRESS=peer0.Insurance-ehr.com:7051
   export CORE_PEER_LOCALMSPID=InsuranceMSP
   export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Insurance-ehr.com/peers/peer0.Insurance-ehr.com/tls/ca.crt
-  peer chaincode install -n ehrcc -v 1.0 -p /opt/gopath/src/github.com/chaincode/ehr
+  peer lifecycle chaincode install ehrcc.tar.gz
 
 ```
 
