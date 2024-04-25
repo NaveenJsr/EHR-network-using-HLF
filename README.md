@@ -198,7 +198,6 @@ org1:
     --channelID ehrchannel \
     --name ehrcc \
     --version 1.0 \
-    --package-id <id> \
     --sequence 1 \
     --init-required \
     --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
@@ -222,7 +221,6 @@ org2:
     --channelID ehrchannel \
     --name ehrcc \
     --version 1.0 \
-    --package-id <id> \
     --sequence 1 \
     --init-required \
     --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
@@ -246,7 +244,6 @@ org3:
     --channelID ehrchannel \
     --name ehrcc \
     --version 1.0 \
-    --package-id <id> \
     --sequence 1 \
     --init-required \
     --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
@@ -270,7 +267,6 @@ peer lifecycle chaincode approveformyorg \
   --channelID ehrchannel \
   --name ehrcc \
   --version 1.0 \
-  --package-id <id> \
   --sequence 1 \
   --init-required \
   --signature-policy "OR('HospitalMSP.peer','PatientMSP.peer','LabsMSP.peer','InsuranceMSP.peer')" \
